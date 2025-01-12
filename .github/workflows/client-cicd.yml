@@ -24,13 +24,13 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Build ## npm, init,build
+        continue-on-error: true
         run: |
-# echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
           echo ${{ secrets.MAIN_ENV }} | .env.production
           npm install
           npm run build
-          continue-on-error: true
           npm run export
+        # echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
         # npm run lint
         working-directory: frontend
 
