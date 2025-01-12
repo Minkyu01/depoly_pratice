@@ -1,4 +1,4 @@
-"use strict";
+"use client";
 import { useState } from "react";
 
 export default function Board() {
