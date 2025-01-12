@@ -1,0 +1,67 @@
+.page1-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.page1-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.toggle-container,
+.language-button-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.toggle-button,
+.language-button {
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem;
+}
+
+/* 폼 스타일 */
+.word-input-form,
+.conversation-input-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.word-input-form label,
+.conversation-input-form label {
+  font-weight: 600;
+}
+
+.word-input-form input,
+.conversation-input-form input,
+.word-input-form textarea,
+.conversation-input-form textarea {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.word-input-form button,
+.conversation-input-form button {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+/* 반응형 (모바일) */
+@media (max-width: 480px) {
+  .page1-container {
+    padding: 0.5rem;
+  }
+
+  .page1-title {
+    font-size: 1.2rem;
+  }
+}
