@@ -27,8 +27,9 @@ jobs:
         run: |
           echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
           npm install
-    # npm run lint
           npm run build
+          npm run export
+        # npm run lint
         working-directory: client
 
       - name: Configure AWS credentials
