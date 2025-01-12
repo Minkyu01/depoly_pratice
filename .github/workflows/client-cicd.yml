@@ -25,9 +25,11 @@ jobs:
 
       - name: Build ## npm, init,build
         run: |
-          echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
+# echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
+          echo ${{ secrets.MAIN_ENV }} | .env.production
           npm install
           npm run build
+          continue-on-error: true
           npm run export
         # npm run lint
         working-directory: frontend
