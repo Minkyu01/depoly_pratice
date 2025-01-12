@@ -24,11 +24,11 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Build ## npm, init,build
-        continue-on-error: true
+        continue-on-error: true # 나중에 lint에러 고쳐서 넣기
         run: |
           npm install
           npm run build
-          npm run export
+        # npm run export -> next.js 13부터 next build로 통합
         # echo ${{ secrets.MAIN_ENV }} | .env.production
         # echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
         # npm run lint
@@ -46,5 +46,12 @@ jobs:
         if: ${{ github.ref == 'refs/heads/main' }}
         run: |
           cd frontend
-          aws s3 sync ./dist s3://${{ secrets.AWS_S3_CLIENT_MAIN_BUCKET_NAME }}
+          aws s3 sync ./out s3://${{ secrets.AWS_S3_CLIENT_MAIN_BUCKET_NAME }}
           aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_MAIN_DISTRIBUTION_ID }} --paths "/*"
+
+      # - name: Deploy to Main S3 and Invalidate CloudFront cache
+      #   if: ${{ github.ref == 'refs/heads/main' }}
+      #   run: |
+      #     cd frontend
+      #     aws s3 sync ./dist s3://${{ secrets.AWS_S3_CLIENT_MAIN_BUCKET_NAME }}
+      #     aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_MAIN_DISTRIBUTION_ID }} --paths "/*"
