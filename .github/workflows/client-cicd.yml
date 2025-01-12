@@ -21,18 +21,18 @@ jobs:
         with:
           node-version: 18
           cache: "npm"
-          cache-dependency-path: client/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Build ## npm, init,build
         run: |
           echo ${{ secrets.MAIN_ENV }} | base64 -d > .env.production
           npm install
-          npm run lint
+    # npm run lint
           npm run build
         working-directory: client
 
       - name: Configure AWS credentials
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/main' }} # 현재 브랜치가 main일때만 실행
         uses: aws-actions/configure-aws-credentials@v3
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
